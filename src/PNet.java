@@ -30,21 +30,26 @@ public class PNet {
 				if(marking.charAt(i)!=',')
 					temp += marking.charAt(i);
 				else{
-					System.out.println(temp);
 					inputTransition[placesCount] = Integer.parseInt(temp);
 					placesCount++;
 					temp = "";
 				}
-				
 			}
 			inputMap.put(transition, inputTransition);
+			placesCount = 0;
 	}
 	
 	public void addOutput(int transition, String marking){
 		int[] outputTransition = new int[places];
-		
-			for(int i = 0; i<places; i++){
-				outputTransition[i] = Character.getNumericValue(marking.charAt(i));
+		marking+=",";
+			for(int i = 0; i<marking.length(); i++){
+				if(marking.charAt(i)!=',')
+					temp+=marking.charAt(i);
+				else{
+					outputTransition[placesCount] = Integer.parseInt(temp);
+					placesCount++;
+					temp = "";
+				}
 			}
 			outputMap.put(transition, outputTransition);
 	}

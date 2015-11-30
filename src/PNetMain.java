@@ -34,6 +34,21 @@ public class PNetMain {
 		}
 	}
 	
+	public static void outputMarkings(){
+		int trans = 1;
+		
+		while(trans<=t){
+			System.out.println("Please enter the output marking for transition "+trans+" sepearated by commas:");
+			String output = scan.nextLine();
+			
+			if(commaValue(output)==p){
+				nico.addInput(trans,output);
+				trans++;
+			}else{
+				System.out.println("Not enough output markings try again");
+			}
+		}
+	}
 	public static int commaValue(String input){
 		int val = 1;
 		for(int i =0; i<input.length(); i++){
@@ -49,6 +64,9 @@ public class PNetMain {
 		scan.nextLine();
 		inputMarkings();
 		nico.prinOut();
+		outputMarkings();
+		nico.prinOut();
+		
 
 	}
 
