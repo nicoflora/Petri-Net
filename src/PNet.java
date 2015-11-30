@@ -6,7 +6,8 @@ import java.util.Set;
 public class PNet {
 
 	int places, transitions;
-	
+	int placesCount = 0;
+	String temp = "";
 	int[] initialMarking;
 	
 	HashMap<Integer, int[]> inputMap;
@@ -24,9 +25,17 @@ public class PNet {
 	
 	public void addInput(int transition, String marking){
 		int[] inputTransition = new int[places];
-		
-			for(int i = 0; i<places; i++){
-				inputTransition[i] = Character.getNumericValue(marking.charAt(i));
+		marking += ",";
+			for(int i = 0; i<marking.length(); i++){
+				if(marking.charAt(i)!=',')
+					temp += marking.charAt(i);
+				else{
+					System.out.println(temp);
+					inputTransition[placesCount] = Integer.parseInt(temp);
+					placesCount++;
+					temp = "";
+				}
+				
 			}
 			inputMap.put(transition, inputTransition);
 	}
