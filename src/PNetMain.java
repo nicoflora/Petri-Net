@@ -82,6 +82,8 @@ public class PNetMain {
 		nico.prinOutOutput();
 		initialMarking();
 		nico.printOutInitialMarking();
+		
+		nico.calculations();
 
 	}
 

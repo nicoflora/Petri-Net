@@ -2,6 +2,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
+import sun.misc.Queue;
+
 
 public class PNet {
 
@@ -9,6 +11,8 @@ public class PNet {
 	int placesCount = 0;
 	String temp = "";
 	int[] initialMarking;
+	Queue<String> answers = new Queue<String>();
+	
 	
 	HashMap<Integer, int[]> inputMap;
 	HashMap<Integer, int[]> outputMap;
@@ -69,6 +73,38 @@ public class PNet {
 				temp = "";
 			}
 		}
+	}
+	
+	public void calculations(){
+		String temp = "";
+		int[] tempIMarking = getMarking(initialMarking);
+		int tempVal = 0;
+		for(int i =1; i<=transitions; i++){
+			for(int j = 0; j<places; j++){
+				tempVal = tempIMarking[j] - inputMap.get(i)[j] + outputMap.get(i)[j];
+				temp += tempIMarking[j] - inputMap.get(i)[j] + outputMap.get(i)[j]+",";
+				tempIMarking[j] = tempVal;
+			}
+			printOutIMarking(tempIMarking);
+		}
+	}
+	
+	public void printOutIMarking(int[] m){
+		System.out.println("\n\nReachable Marking:");
+		for(int i = 0; i<m.length; i++){
+			System.out.print(m[i]+",");
+		}
+		System.out.println("\n\nEND Reachable Marking");
+
+	}
+	
+	public int[] getMarking(int[] m){
+		int[] temp = new int[m.length];
+		for(int i =0; i<m.length; i++){
+			temp[i] = m[i];
+		}
+		
+		return temp;
 	}
 	
 	public void prinOutInput(){
