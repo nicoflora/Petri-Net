@@ -49,6 +49,20 @@ public class PNetMain {
 			}
 		}
 	}
+	
+	public static void initialMarking(){
+		while(true){
+			System.out.println("Please enter the initial marking:");
+			String initialMarking = scan.nextLine();
+			if(commaValue(initialMarking) == p){
+				nico.addInitialMarking(initialMarking);
+				return;
+			}else{
+				System.out.println("Not enough initial markings, try again");
+			}
+		}
+	}
+	
 	public static int commaValue(String input){
 		int val = 1;
 		for(int i =0; i<input.length(); i++){
@@ -66,7 +80,8 @@ public class PNetMain {
 		nico.prinOutInput();
 		outputMarkings();
 		nico.prinOutOutput();
-		
+		initialMarking();
+		nico.printOutInitialMarking();
 
 	}
 

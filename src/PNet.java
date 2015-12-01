@@ -56,6 +56,21 @@ public class PNet {
 			outputMap.put(transition, outputTransition);
 	}
 	
+	public void addInitialMarking(String marking){
+		placesCount = 0;
+		marking+=",";
+		for(int i = 0; i<marking.length(); i++){
+			if(marking.charAt(i)!=','){
+				temp+=marking.charAt(i);
+			}
+			else{
+				initialMarking[placesCount] = Integer.parseInt(temp);
+				placesCount++;
+				temp = "";
+			}
+		}
+	}
+	
 	public void prinOutInput(){
 		Iterator iterator = inputMap.keySet().iterator();
 
@@ -86,5 +101,14 @@ public class PNet {
 		   }
 		   System.out.println("\n---------------------------");
 		}
+	}
+	
+	public void printOutInitialMarking(){
+		System.out.println("Initial Marking");
+		System.out.println("---------------------------");
+		for(int i = 0; i<initialMarking.length; i++){
+			System.out.print(initialMarking[i]+",");
+		}
+		 System.out.println("\n---------------------------");
 	}
 }
