@@ -25,6 +25,7 @@ public class PNet {
 	
 	public void addInput(int transition, String marking){
 		int[] inputTransition = new int[places];
+		placesCount = 0;
 		marking += ",";
 			for(int i = 0; i<marking.length(); i++){
 				if(marking.charAt(i)!=',')
@@ -36,11 +37,12 @@ public class PNet {
 				}
 			}
 			inputMap.put(transition, inputTransition);
-			placesCount = 0;
+			
 	}
 	
 	public void addOutput(int transition, String marking){
 		int[] outputTransition = new int[places];
+		placesCount = 0;
 		marking+=",";
 			for(int i = 0; i<marking.length(); i++){
 				if(marking.charAt(i)!=',')
@@ -54,7 +56,7 @@ public class PNet {
 			outputMap.put(transition, outputTransition);
 	}
 	
-	public void prinOut(){
+	public void prinOutInput(){
 		Iterator iterator = inputMap.keySet().iterator();
 
 		while (iterator.hasNext()) {
@@ -64,7 +66,23 @@ public class PNet {
 		   System.out.println("---------------------------");
 		   for(int i = 0; i<value.length; i++)
 		   {
-			   System.out.print(value[i]);
+			   System.out.print(value[i]+",");
+		   }
+		   System.out.println("\n---------------------------");
+		}
+	}
+	
+	public void prinOutOutput(){
+		Iterator iterator = outputMap.keySet().iterator();
+
+		while (iterator.hasNext()) {
+		   int key = Integer.parseInt(iterator.next().toString());
+		   int[] value = outputMap.get(key);
+		   System.out.println("TRANSITION "+key);
+		   System.out.println("---------------------------");
+		   for(int i = 0; i<value.length; i++)
+		   {
+			   System.out.print(value[i]+",");
 		   }
 		   System.out.println("\n---------------------------");
 		}

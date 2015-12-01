@@ -42,7 +42,7 @@ public class PNetMain {
 			String output = scan.nextLine();
 			
 			if(commaValue(output)==p){
-				nico.addInput(trans,output);
+				nico.addOutput(trans,output);
 				trans++;
 			}else{
 				System.out.println("Not enough output markings try again");
@@ -63,9 +63,9 @@ public class PNetMain {
 		nico = new PNet(places(),transitions());
 		scan.nextLine();
 		inputMarkings();
-		nico.prinOut();
+		nico.prinOutInput();
 		outputMarkings();
-		nico.prinOut();
+		nico.prinOutOutput();
 		
 
 	}
