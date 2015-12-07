@@ -179,9 +179,12 @@ public class PNet {
 	}
 	
 	public void printOutReachable(){
+			
 		for(int i = 0; i<reach.size(); i++){
+			System.out.println("Reachable marking: "+i);
 			System.out.println(reach.get(i));
 		}
+		
 	}
 	
 	public void iterateReachable(){
