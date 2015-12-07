@@ -88,6 +88,7 @@ public class PNetMain {
 		nico.printOutInitialMarking();
 		
 		nico.calculations();
+		nico.calculations2();
 		
 		nico.printOutReachable();
 		nico.iterateReachable();

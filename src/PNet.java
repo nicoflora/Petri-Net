@@ -97,8 +97,31 @@ public class PNet {
 			reach.add(tempVal);
 			tempVal="";
 		}
-		
-		
+	}
+	
+	public void calculations2(){
+		int[] tempIMarking = getMarking(initialMarking);
+		reachable.put(0, tempIMarking);
+		String tempVal = "";
+		int val = 0;
+		for(int x = 0; x<=initialMarking.length; x++){
+				int[] temp = reachable.get(x);
+				for(int a = 0; a<temp.length; a++){
+					System.out.println("VAL: "+temp[a]);
+				}
+				for(int i =1; i<=transitions; i++){
+					int[] mark = createUnique();
+					for(int j = 0; j<places; j++){
+						val = temp[j] - inputMap.get(i)[j] + outputMap.get(i)[j];
+						mark[j] = temp[j] - inputMap.get(i)[j] + outputMap.get(i)[j];
+						tempVal += (val+",");
+					}
+					if(!reach.contains(tempVal)){
+						reach.add(tempVal);
+					}
+					tempVal="";
+			}
+		}
 	}
 	
 	public int[] createUnique(){
