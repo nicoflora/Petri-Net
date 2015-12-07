@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -11,11 +12,14 @@ public class PNet {
 	int placesCount = 0;
 	String temp = "";
 	int[] initialMarking;
+	
+	
 	Queue<String> answers = new Queue<String>();
 	
-	
+	ArrayList<String> reach = new ArrayList<String>();
 	HashMap<Integer, int[]> inputMap;
 	HashMap<Integer, int[]> outputMap;
+	HashMap<Integer, int[]> reachable;
 	
 	public PNet(int places, int transitions)
 	{
@@ -24,6 +28,7 @@ public class PNet {
 		
 		inputMap = new HashMap<Integer, int[]>();
 		outputMap = new HashMap<Integer, int[]>();
+		reachable = new HashMap<Integer, int[]>();
 		initialMarking = new int[places];
 	}
 	
@@ -76,25 +81,36 @@ public class PNet {
 	}
 	
 	public void calculations(){
-		String temp = "";
 		int[] tempIMarking = getMarking(initialMarking);
-		int tempVal = 0;
+		
+		String tempVal = "";
+		int val = 0;
 		for(int i =1; i<=transitions; i++){
+			int[] mark = createUnique();
 			for(int j = 0; j<places; j++){
-				tempVal = tempIMarking[j] - inputMap.get(i)[j] + outputMap.get(i)[j];
-				temp += tempIMarking[j] - inputMap.get(i)[j] + outputMap.get(i)[j]+",";
-				tempIMarking[j] = tempVal;
+				val = tempIMarking[j] - inputMap.get(i)[j] + outputMap.get(i)[j];
+				mark[j] = tempIMarking[j] - inputMap.get(i)[j] + outputMap.get(i)[j];
+				tempIMarking[j] = tempIMarking[j] - inputMap.get(i)[j] + outputMap.get(i)[j];
+				tempVal += (val+",");
 			}
-			printOutIMarking(tempIMarking);
+			reachable.put(i, mark);
+			reach.add(tempVal);
+			tempVal="";
 		}
+		
+		
+	}
+	
+	public int[] createUnique(){
+		return new int[places];
 	}
 	
 	public void printOutIMarking(int[] m){
-		System.out.println("\n\nReachable Marking:");
+		System.out.println("\nReachable Marking:");
 		for(int i = 0; i<m.length; i++){
 			System.out.print(m[i]+",");
 		}
-		System.out.println("\n\nEND Reachable Marking");
+		System.out.println("\nEND Reachable Marking");
 
 	}
 	
@@ -129,6 +145,28 @@ public class PNet {
 		while (iterator.hasNext()) {
 		   int key = Integer.parseInt(iterator.next().toString());
 		   int[] value = outputMap.get(key);
+		   System.out.println("TRANSITION "+key);
+		   System.out.println("---------------------------");
+		   for(int i = 0; i<value.length; i++)
+		   {
+			   System.out.print(value[i]+",");
+		   }
+		   System.out.println("\n---------------------------");
+		}
+	}
+	
+	public void printOutReachable(){
+		for(int i = 0; i<reach.size(); i++){
+			System.out.println(reach.get(i));
+		}
+	}
+	
+	public void iterateReachable(){
+		Iterator iterator = reachable.keySet().iterator();
+
+		while (iterator.hasNext()) {
+		   int key = Integer.parseInt(iterator.next().toString());
+		   int[] value = reachable.get(key);
 		   System.out.println("TRANSITION "+key);
 		   System.out.println("---------------------------");
 		   for(int i = 0; i<value.length; i++)

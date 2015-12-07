@@ -65,6 +65,10 @@ public class PNetMain {
 	
 	public static int commaValue(String input){
 		int val = 1;
+		if( input.equals(""))
+			return 0;
+		if(input.charAt(0) == ',' || input.charAt(input.length()-1)== ',')
+			return 0;
 		for(int i =0; i<input.length(); i++){
 			if(input.charAt(i)==','){
 				val++;
@@ -84,6 +88,9 @@ public class PNetMain {
 		nico.printOutInitialMarking();
 		
 		nico.calculations();
+		
+		nico.printOutReachable();
+		nico.iterateReachable();
 
 	}
 
