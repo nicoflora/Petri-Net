@@ -105,7 +105,9 @@ public class PNet {
 		boolean add = true;
 		String tempVal = "";
 		int val = 0;
-		for(int x = 0; x<initialMarking.length; x++){
+		//initialMarking.length
+		System.out.println("REACHABLE size "+reachable.size());
+		for(int x = 0; x<reachable.size(); x++){
 				int[] temp = reachable.get(x);
 				for(int i =1; i<=transitions; i++){
 					int[] mark = createUnique();
@@ -181,7 +183,7 @@ public class PNet {
 	public void printOutReachable(){
 			
 		for(int i = 0; i<reach.size(); i++){
-			System.out.println("Reachable marking: "+i);
+			System.out.println("Reachable marking: "+(i+1));
 			System.out.println(reach.get(i));
 		}
 		
